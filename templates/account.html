@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>ITEMS</title>
+        <style>
+            body {
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                background-color: antiquewhite;
+                padding: 20px;
+            }
+
+        </style>
+    </head>
+    
+    <body>
+        <h2>basket</h2>
+        <table class="history-table">
+            <tr>
+                <th>date</th>
+                <th>name</th>
+                <th>price</th>
+            </tr>
+            {% for date, name, price in rows %}
+            <tr>
+
+                <td>{{ name }}</td>
+                <td>{{ price }}</td>
+                <td>
+                    {{ date}}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        <div class="back-link">
+            <a href="{{ url_for('index') }}">go back</a>
+        </div>
+    </body>
+
+</html>

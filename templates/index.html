@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>ITEMS</title>
+        <style>
+            body {
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                background-color: antiquewhite;
+                padding: 20px;
+                margin: 0;
+            }
+            header {
+                background-color: rgb(53, 45, 41);
+                color: wheat;
+                padding: 20px 30px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            header h1 {
+                margin: 0;
+                font-size: 20px;
+            }
+            header nav a {
+                margin-left: 20px;
+                color: antiquewhite;
+                text-decoration: none;
+                font-size: 16px;
+            }
+
+            header nav a:hover {
+                text-decoration: underline;
+            }
+
+            .search-bar {
+
+                border-radius: 4px;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+    
+            .search-bar input[type="text"] {
+                padding: 10px;
+                width: 300px;
+                font-size: 16px;
+            }
+
+            .grid {
+                display:grid;
+                align-items: center;
+                grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+                gap: 20px;
+                margin-top: 30px;
+            }
+
+            .item-box {
+                align-items: center;
+                border-radius: 6px;
+                background-color: bisque;
+                padding: 20px;
+
+            }
+            .message {
+                color: brown;
+            }
+
+            button {
+                padding: 8px 14px;
+                background-color: #35302c;
+                color: rgb(221, 205, 205);
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background-color: #857056;
+            }
+
+            .item-name {
+                font-weight: bold;
+                margin-bottom: 6px;
+                font-size: 18px;
+            }
+    
+            .item-description {
+                font-size: 14px;
+                margin-bottom: 6px;
+            }
+    
+            .item-price {
+                font-size: 16px;
+                margin-bottom: 6px;
+            }
+    
+            .item-category {
+                font-size: 13px;
+                margin-bottom: 10px;
+            }
+
+
+
+
+        </style>
+    </head>
+    
+    <body>
+        <header>
+            <h1>silly shop</h1>
+            <nav>
+                <a href = "{{ url_for('account') }}">account</a>
+            </nav>
+            <div class = "search-bar">
+                <input type = "text" name = "search" placeholder="serch with item name">
+                <button type = "submit"> serach</button>
+            </div>
+        </header>
+
+        <div class = grid>
+        {% for id, name, description, price, category in rows %}
+        <div class = 'item-box'>
+            <div class = 'item-name'> name: {{ name }} </div>
+            <div class = 'item-description'>description: {{ description }}</div>
+            <div class = 'item-price'>price: {{ price }}</div>
+            <div class = 'item-category'>category: {{ category }}</div>
+            <form method="post">
+                <input type = "hidden" name = "item_id" value = "{{id}}">
+                <button type = "submit">buy</button>
+            </form>
+            {% if message and last_bought_id == id %}
+            <div class = 'message'>
+                {{message}}
+            </div>
+            {% endif %}
+
+           
+        </div>
+        {% endfor %}
+        </div>
+    </body>
+
+</html>
